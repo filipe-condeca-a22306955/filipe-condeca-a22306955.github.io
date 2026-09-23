@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portimão</title>
+    <style>
+      .fotografias {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .fotografias img {
+        width: 150px;
+        border-radius: 20px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -17,8 +30,55 @@
     </header>
     <main>
       <h2>Multimédia</h2>
-      <section>
+      <nav>
+        <a href="#fotografias">Fotografias</a>
+        <a href="#video">Vídeo</a>
+        <a href="#poesia">Poesia</a>
+      </nav>
+
+      <section id="fotografias">
         <h3>Fotografias</h3>
+        <div class="fotografias">
+          <img src="images/miniIgreja.jpg" alt="Igreja" />
+          <img src="images/minirocha.jpg" alt="Praia da Rocha" />
+          <img src="images/rio.jpg" alt="Casas depois do Rio" />
+          <img src="images/panoramica.jpg" alt="Vista panoramica" />
+        </div>
+      </section>
+      <section id="video">
+        <h3>Vídeo</h3>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/IIxtCmBnO6U?si=7_79DtFKT-RdOgq4"
+          title="YouTube video player"
+          frameborder="0"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </section>
+      <section id="poesia">
+        <h3>Poesia</h3>
+        <div>
+          <p>Portimão, terra de sol e mar,</p>
+          <p>Onde as ondas vêm dançar,</p>
+          <p>Entre praias de beleza sem igual,</p>
+          <p>Um cantinho do Algarve especial.</p>
+          <p>""</p>
+          <p>Do rio Arade ao pôr do sol,</p>
+          <p>Há sempre um encanto neste lugar,</p>
+          <p>Portimão guarda no seu coração</p>
+          <p>A alma de quem gosta de sonhar.</p>
+        </div>
       </section>
     </main>
     <footer>DIW 2026</footer>

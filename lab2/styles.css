@@ -1,0 +1,29 @@
+body {
+  background-color: #1b56a9;
+  margin: 0;
+}
+
+header{
+      background-color: #251ba9;
+      color: white;
+      margin: 0;
+      padding: 10px;
+}
+
+main {
+  padding: 55px;
+}
+
+nav {
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+footer {
+  background-color: #222;
+  color: white;
+  padding: 10px;
+}
+

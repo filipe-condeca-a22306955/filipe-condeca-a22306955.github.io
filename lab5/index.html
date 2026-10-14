@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        height: 200px;
+        background-color: lightgray;
+
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        padding: 10px;
+      }
+
+      .bola {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section id="passagem">
+        <p id="texto-passagem">1.Passa por aqui!</p>
+      </section>
+
+      <section id="pintura">
+        <p id="texto-pintar">2.Pinta-me!</p>
+
+        <button class="color" data-cor="red">Vermelho</button>
+        <button class="color" data-cor="blue">Azul</button>
+        <button class="color" data-cor="green">Verde</button>
+      </section>
+
+      <section id="troca-cor">
+        <p>
+          3.Experimenta escolher uma cor...
+          <select id="input-troca-cor">
+            <option value="white">Branco</option>
+            <option value="red">Vermelho</option>
+            <option value="blue">Azul</option>
+          </select>
+        </p>
+      </section>
+
+      <section id="imput-cor">
+        <p>
+          4.Escolha uma cor em Inglês:<input
+            type="text"
+            id="input-cor-fundo"
+            placeholder="Escreve aqui"
+          />
+          <button id="submeter-fundo">Submeter</button>
+        </p>
+      </section>
+
+      <section id="contagem">
+        <p>5.Contador:</p>
+        <button id="incrementar">+</button>
+        <button id="decrementar">-</button>
+        <button id="reset">Reset</button>
+
+        <p id="contador">0</p>
+      </section>
+
+      <section>
+        <select id="direcao">
+          <option value="row">row</option>
+          <option value="row-reverse">row-reverse</option>
+          <option value="column">column</option>
+          <option value="column-reverse">column-reverse</option>
+        </select>
+
+        <div id="container">
+          <div class="bola"></div>
+          <div class="bola"></div>
+          <div class="bola"></div>
+          <div class="bola"></div>
+        </div>
+      </section>
+
+      <section id="form">
+        <form>
+          <input id="nome" type="text" placeholder="Insira o seu nome" />
+
+          <input id="idade" type="number" placeholder="Insira a sua idade" />
+
+          <input type="submit" />
+        </form>
+
+        <p id="mensagem"></p>
+      </section>
+
+      <section id="automatico">
+        <p>7.</p>
+        <p id="contador-automatico">0</p>
+      </section>
+    </main>
+    <script>
+      //1
+      const passagem = document.getElementById("passagem");
+      const textoPassagem = document.getElementById("texto-passagem");
+
+      passagem.addEventListener("mouseover", () => {
+        textoPassagem.textContent = "1.Obrigado por passares!";
+      });
+
+      passagem.addEventListener("mouseout", () => {
+        textoPassagem.textContent = "1.Passa por aqui!";
+      });
+
+      //2
+      const textoPintar = document.getElementById("texto-pintar");
+
+      document.querySelectorAll("button.color").forEach((botao) => {
+        botao.addEventListener("click", () => {
+          textoPintar.style.color = botao.dataset.cor;
+        });
+      });
+      //3
+      const seletor = document.getElementById("input-troca-cor");
+
+      seletor.addEventListener("change", function () {
+        document.body.style.backgroundColor = this.value;
+      });
+
+      //4
+      const inputCor = document.getElementById("input-cor-fundo");
+      const botaoFundo = document.getElementById("submeter-fundo");
+
+      botaoFundo.addEventListener("click", () => {
+        const cor = inputCor.value.trim();
+
+        document.body.style.backgroundColor = cor;
+      });
+      //contagem
+      const contador = document.getElementById("contador");
+      const btnIncrementar = document.getElementById("incrementar");
+      const btnDecrementar = document.getElementById("decrementar");
+      const btnReset = document.getElementById("reset");
+
+      let valor = Number(localStorage.getItem("contador")) || 0;
+
+      contador.textContent = valor;
+
+      // Incrementar
+      btnIncrementar.addEventListener("click", () => {
+        valor++;
+        contador.textContent = valor;
+        localStorage.setItem("contador", valor);
+      });
+
+      // Decrementar
+      btnDecrementar.addEventListener("click", () => {
+        valor--;
+        contador.textContent = valor;
+        localStorage.setItem("contador", valor);
+      });
+
+      // Reset
+      btnReset.addEventListener("click", () => {
+        valor = 0;
+        contador.textContent = valor;
+        localStorage.setItem("contador", valor);
+      });
+
+      //select flex
+      const select = document.getElementById("direcao");
+      const container = document.getElementById("container");
+
+      select.addEventListener("change", function () {
+        container.style.flexDirection = this.value;
+      });
+
+      //form
+      document.querySelector("form").onsubmit = (e) => {
+        e.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const idade = document.getElementById("idade").value;
+
+        document.getElementById("mensagem").textContent =
+          `Olá, o ${nome} tem ${idade}!`;
+      };
+
+      //contador automatico
+      let value = 0;
+      const automatico = document.getElementById("contador-automatico");
+
+      function count() {
+        value++;
+        automatico.textContent = value;
+      }
+
+      setInterval(count, 1000);
+    </script>
+  </body>
+</html>

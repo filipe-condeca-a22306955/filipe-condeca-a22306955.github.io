@@ -1,0 +1,123 @@
+body {
+  background-color: #1492b5;
+  margin: 0;
+}
+
+header {
+  background-color: #251ba9;
+  color: white;
+  margin: 0;
+  padding: 10px;
+}
+
+main {
+  padding: 55px;
+}
+
+nav {
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  #local-container {
+    flex-direction: column; /* telemóvel: texto por cima */
+    text-align: center;
+  }
+
+  #local-container iframe {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+/* ---------- Contentores (grelhas de cartões) ---------- */
+
+.lista-produtos,
+.cesto-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Cartão base (partilhado) ---------- */
+
+.lista-produtos article,
+.cesto-produtos article {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.lista-produtos article h3,
+.cesto-produtos article h3 {
+  grid-area: titulo;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.lista-produtos article img,
+.cesto-produtos article img {
+  grid-area: imagem;
+  width: 100%;
+  object-fit: contain;
+}
+
+.lista-produtos article h4,
+.cesto-produtos article h4 {
+  grid-area: preco;
+  margin: 0;
+}
+
+.lista-produtos article button,
+.cesto-produtos article button {
+  grid-area: botao;
+}
+
+/* ---------- Cartão de produto ---------- */
+
+.lista-produtos article {
+  grid-template-areas:
+    "imagem"
+    "titulo"
+    "descricao"
+    "preco"
+    "botao";
+  grid-template-rows: auto auto 1fr auto auto;
+}
+
+.lista-produtos article img {
+  height: 200px;
+}
+
+.lista-produtos article p {
+  grid-area: descricao;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* ---------- Cartão do cesto ---------- */
+
+.cesto-produtos article {
+  grid-template-areas:
+    "imagem"
+    "titulo"
+    "preco"
+    "botao";
+  grid-template-rows: auto 1fr auto auto;
+}
+
+.cesto-produtos article img {
+  height: 120px;
+}
+
+/* ---------- Total ---------- */
+
+.preco-total {
+  color: white;
+  margin-top: 20px;
+}

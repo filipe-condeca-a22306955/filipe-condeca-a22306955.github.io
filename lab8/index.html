@@ -14,6 +14,18 @@
           <li><a href="#produtos">Produtos</a></li>
           <li><a href="#cesto">Cesto</a></li>
         </ul>
+
+        <select id="categoria">
+          <option value="">Todas as categorias</option>
+        </select>
+
+        <select id="ordenacao">
+          <option value="">Ordenar por preço</option>
+          <option value="asc">Preço crescente</option>
+          <option value="desc">Preço decrescente</option>
+        </select>
+
+        <input type="text" id="pesquisa" placeholder="Pesquisar produto..." />
       </nav>
     </header>
 
@@ -27,6 +39,20 @@
         <h2>Cesto de Compras</h2>
         <div class="cesto-produtos"></div>
         <h3 class="preco-total">Preço total: 0 €</h3>
+      </section>
+
+      <section id="pagamento">
+        <input type="text" id="coupon" placeholder="Cupão" />
+
+        <label>
+          <input type="checkbox" id="student" />
+          És estudante do DEISI?
+        </label>
+
+        <button id="comprar">Comprar</button>
+
+        <p>Preço final: <span id="total"></span></p>
+        <p>Referência: <span id="referencia"></span></p>
       </section>
     </main>
 

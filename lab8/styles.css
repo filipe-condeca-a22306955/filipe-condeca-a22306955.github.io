@@ -4,10 +4,15 @@ body {
 }
 
 header {
-  background-color: #251ba9;
+  background: linear-gradient(135deg, #251ba9, #3e2cff);
   color: white;
-  margin: 0;
-  padding: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 main {
@@ -15,10 +20,46 @@ main {
 }
 
 nav {
-  background-color: #222;
-  color: white;
-  padding: 10px;
+  background-color: white;
+  color: #251ba9;
+  padding: 15px;
   border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+nav input,
+nav select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+nav input:focus,
+nav select:focus {
+  outline: none;
+  border-color: #251ba9;
+}
+
+
+button {
+  background-color: #251ba9;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #3e2cff;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {

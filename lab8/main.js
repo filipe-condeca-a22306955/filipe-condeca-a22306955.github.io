@@ -82,7 +82,10 @@ function criaProdutoCesto(produto){
 
 // C. Event handlers
 
-function renderizarProdutos(produtos){
+function renderizarProdutos(produtos) {
+
+    divProdutos.innerHTML = "";
+
     produtos.forEach(produto => {
         divProdutos.append(criarProduto(produto));
     });
@@ -97,7 +100,7 @@ function atualizaCesto() {
 
     produtos.forEach(function(produto) {
         divCesto.append(criaProdutoCesto(produto));
-        total += produto.price;
+        total += Number(produto.price);
     });
 
     document.querySelector('.preco-total').textContent = `Preço total: ${total.toFixed(2)} €`;
@@ -115,5 +118,111 @@ async function obterDados() {
 }
 obterDados();
 
+
+async function carregarCategorias() {
+    const response = await fetch("https://deisishop.pw.deisi.ulusofona.pt/categories");
+    const categorias = await response.json();
+
+    const select = document.getElementById("categoria");
+
+    categorias.forEach(categoria => {
+        const option = document.createElement("option");
+        option.value = categoria.name;
+        option.textContent = categoria.name;
+        select.appendChild(option);
+    });
+}
+carregarCategorias();
+
+function atualizarProdutos() {
+
+    const categoriaSelecionada =
+        document.getElementById("categoria").value;
+
+    const ordenacao =
+        document.getElementById("ordenacao").value;
+
+    const textoPesquisa =
+        document.getElementById("pesquisa").value.toLowerCase();
+
+    let lista = [...produtos];
+
+    // filtro por categoria
+    if (categoriaSelecionada !== "") {
+        lista = lista.filter(
+            produto => produto.category === categoriaSelecionada
+        );
+    }
+
+    // filtro por texto
+    if (textoPesquisa !== "") {
+        lista = lista.filter(
+            produto => produto.title
+                .toLowerCase()
+                .includes(textoPesquisa)
+        );
+    }
+
+    // ordenação
+    if (ordenacao === "asc") {
+        lista.sort((a, b) => Number(a.price) - Number(b.price));
+    }
+
+    if (ordenacao === "desc") {
+        lista.sort((a, b) => Number(b.price) - Number(a.price));
+    }
+
+    renderizarProdutos(lista);
+}
+
+async function comprar() {
+
+    const produtosCesto = JSON.parse(localStorage.getItem("produtos-selecionados"));
+
+    const idsProdutosCompra = produtosCesto.map(produto => produto.id);
+
+
+    const response = await fetch(
+        "https://deisishop.pw.deisi.ulusofona.pt/buy",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                products: idsProdutosCompra,
+                student: document.getElementById("student").checked,
+                coupon: document.getElementById("coupon").value
+            })
+        }
+    );
+
+    const dados = await response.json();
+
+    if (dados.error) {
+        alert(dados.error);
+        return;
+    }
+
+    document.getElementById("total").textContent =
+        dados.totalCost + " €";
+
+    document.getElementById("referencia").textContent =
+        dados.reference;
+}
+
+
+document.getElementById("categoria")
+    .addEventListener("change", atualizarProdutos);
+
+document.getElementById("ordenacao")
+    .addEventListener("change", atualizarProdutos);
+
+document.getElementById("pesquisa")
+    .addEventListener("input", atualizarProdutos);
+
+document
+    .getElementById("comprar")
+    .addEventListener("click", comprar);
 
 atualizaCesto();
